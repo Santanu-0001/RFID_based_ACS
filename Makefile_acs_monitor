@@ -1,0 +1,12 @@
+EXEC=acs_monitor_new
+OBJS=miscl.o listen.o serial.o acs_monitor.o
+
+all: $(EXEC)
+
+$(EXEC): $(OBJS)
+	$(CC) $(LDFLAGS) -o $@ $(OBJS) $(LDLIBS) arm-libm4api.a libarmm4api.so -lpthread
+romfs:
+	$(ROMFSINST)	/bin/$(EXEC)
+
+clean:
+	-rm -f $(EXEC) *.elf *.gdb *.o

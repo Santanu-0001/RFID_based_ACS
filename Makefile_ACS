@@ -1,0 +1,12 @@
+EXEC=acs_new
+OBJS=acs_gen_2.o gpio.o rfx.o init.o kharga.o
+
+all: $(EXEC)
+
+$(EXEC): $(OBJS)
+	$(CC) $(LDFLAGS) -o $@ $(OBJS) $(LDLIBS) arm-libm4api.a libarmm4api.so -lpthread
+romfs:
+	$(ROMFSINST)	/bin/$(EXEC)
+
+clean:
+	-rm -f $(EXEC) *.elf *.gdb *.o
